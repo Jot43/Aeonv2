@@ -55,25 +55,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
     elif key == 'universal':
         buttons.ibutton("YT-DLP Options", f"userset {user_id} yt_opt")
         ytopt = 'Not Exists' if (val:=user_dict.get('yt_opt', config_dict.get('YT_DLP_OPTIONS', ''))) == '' else val
-        buttons.ibutton("Prefix", f"userset {user_id} prefix")
-        prefix = user_dict.get('prefix', 'Not Exists')
-
-        buttons.ibutton("Suffix", f"userset {user_id} suffix")
-        suffix = user_dict.get('suffix', 'Not Exists')
-
-        buttons.ibutton("Remname", f"userset {user_id} remname")
-        remname = user_dict.get('remname', 'Not Exists')
-        
-        buttons.ibutton("Attachment", f"userset {user_id} attachment")
-        attachment = user_dict.get('attachment', 'Not Exists')
-
 
         text = f'<b>Universal Settings for {name}</b>\n\n'
         text += f'<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n'
-        text += f'<b>• Prefix:</b> <code>{prefix}</code>\n'
-        text += f'<b>• Suffix:</b> <code>{suffix}</code>\n'
-        text += f'<b>• Attachment:</b> <code>{attachment}</code>\n'
-        text += f'<b>• Remname:</b> <code>{remname}</code>'
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
         button = buttons.build_menu(2)
@@ -115,11 +99,23 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Leech Caption", f"userset {user_id} lcaption")
         lcaption = user_dict.get('lcaption', 'Not Exists')
 
-        buttons.ibutton("Metadata", f"userset {user_id} metadata")
-        metadata = user_dict.get('metadata', 'Not Exists')
+        buttons.ibutton("Prefix", f"userset {user_id} prefix")
+        prefix = user_dict.get('prefix', 'Not Exists')
 
+        buttons.ibutton("Suffix", f"userset {user_id} suffix")
+        suffix = user_dict.get('suffix', 'Not Exists')
+
+        buttons.ibutton("Remname", f"userset {user_id} remname")
+        remname = user_dict.get('remname', 'Not Exists')
+        
+        buttons.ibutton("Attachment", f"userset {user_id} attachment")
+        attachment = user_dict.get('attachment', 'Not Exists')
+        
         buttons.ibutton("Leech Dump", f"userset {user_id} ldump")
         ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
+        
+        buttons.ibutton("Metadata", f"userset {user_id} metadata")
+        metadata = user_dict.get('metadata', 'Not Exists')
 
         SPLIT_SIZE = '4GB' if IS_PREMIUM_USER else '2GB'
         text = f'<b>Leech Settings for {name}</b>\n\n'
@@ -129,6 +125,10 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text += f'<b>• Media Group:</b> {media_group}\n'
         text += f'<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n'
         text += f'<b>• Metadata:</b> <code>{metadata}</code>\n'
+        text += f'<b>• Prefix:</b> <code>{prefix}</code>\n'
+        text += f'<b>• Suffix:</b> <code>{suffix}</code>\n'
+        text += f'<b>• Attachment:</b> <code>{attachment}</code>\n'
+        text += f'<b>• Remname:</b> <code>{remname}</code>'
         text += f'<b>• Leech Dump:</b> <code>{ldump}</code>\n'
         text += f'<b>• MediaInfo Mode:</b> <code>{mediainfo}</code>'
 
