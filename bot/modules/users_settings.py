@@ -58,8 +58,18 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("YT-DLP Options", f"userset {user_id} yt_opt")
         ytopt = 'Not Exists' if (val:=user_dict.get('yt_opt', config_dict.get('YT_DLP_OPTIONS', ''))) == '' else val
 
+        buttons.ibutton("Leech Dump", f"userset {user_id} ldump")
+        ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
+
+        mediainfo = "Enabled" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "Disabled"
+        buttons.ibutton('Disable MediaInfo' if mediainfo == 'Enabled' else 'Enable MediaInfo', f"userset {user_id} mediainfo")
+        if config_dict['SHOW_MEDIAINFO']:
+            mediainfo = "Force Enabled"
+
         text = f'<b>Universal Settings for {name}</b>\n\n'
         text += f'<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n'
+        text += f'<b>• Leech Dump:</b> <code>{ldump}</code>\n'
+        text += f'<b>• MediaInfo Mode:</b> <code>{mediainfo}</code>'
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
         button = buttons.build_menu(2)
@@ -85,10 +95,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             ltype = "MEDIA"
             buttons.ibutton("Send As Document", f"userset {user_id} doc")
 
-        mediainfo = "Enabled" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "Disabled"
-        buttons.ibutton('Disable MediaInfo' if mediainfo == 'Enabled' else 'Enable MediaInfo', f"userset {user_id} mediainfo")
-        if config_dict['SHOW_MEDIAINFO']:
-            mediainfo = "Force Enabled"
         buttons.ibutton("Thumbnail", f"userset {user_id} thumb")
         thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
 
@@ -113,9 +119,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get('attachment', 'Not Exists')
         
-        buttons.ibutton("Leech Dump", f"userset {user_id} ldump")
-        ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
-        
         buttons.ibutton("Metadata", f"userset {user_id} metadata")
         metadata = user_dict.get('metadata', 'Not Exists')
 
@@ -131,8 +134,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text += f'<b>• Suffix:</b> <code>{suffix}</code>\n'
         text += f'<b>• Attachment:</b> <code>{attachment}</code>\n'
         text += f'<b>• Remname:</b> <code>{remname}</code>'
-        text += f'<b>• Leech Dump:</b> <code>{ldump}</code>\n'
-        text += f'<b>• MediaInfo Mode:</b> <code>{mediainfo}</code>'
 
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
