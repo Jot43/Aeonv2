@@ -110,8 +110,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Prefix", f"userset {user_id} prefix")
         prefix = user_dict.get('prefix', 'Not Exists')
 
-        buttons.ibutton("Suffix", f"userset {user_id} suffix")
-        suffix = user_dict.get('suffix', 'Not Exists')
+        suffix = 'Not Exists' if (val:=user_dict.get('lsuffix', config_dict.get('LEECH_FILENAME_SUFFIX', ''))) == '' else val
+        buttons.ibutton(f"{'✅️' if suffix != 'Not Exists' else ''} Leech Suffix", f"userset {user_id} suffix")
 
         buttons.ibutton("Remname", f"userset {user_id} remname")
         remname = user_dict.get('remname', 'Not Exists')
