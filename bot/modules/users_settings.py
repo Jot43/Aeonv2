@@ -120,7 +120,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         attachment = user_dict.get('attachment', 'Not Exists')
         
         metadata = 'Not Exists' if (val:=user_dict.get('metadata', '')) == '' else val
-        buttons.ibutton(f"{'✅️' if metadata != 'Not Exists' else ''} metadata", f"userset {user_id} Metadata")
+        buttons.ibutton(f"{'✅️' if metadata != 'Not Exists' else ''} Metadata", f"userset {user_id} metadata")
 
         SPLIT_SIZE = '3.91GB' if IS_PREMIUM_USER else '2GB'
         text = f'<b>Leech Settings for {name}</b>\n\n'
