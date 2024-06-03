@@ -45,15 +45,15 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
     user_dict = user_data.get(user_id, {})
     if key is None:
         buttons.ibutton("Universal Settings", f"userset {user_id} universal")
-        
         buttons.ibutton("Mirror Settings", f"userset {user_id} mirror")
-        
-        buttons.ibutton("Leech/Metadata Settings", f"userset {user_id} leech")
-        if user_dict and any(key in user_dict for key in ['prefix', 'suffix', 'remname', 'ldump', 'yt_opt', 'media_group', 'rclone', 'thumb', 'as_doc', 'metadata', 'attachment']):
-            buttons.ibutton("Reset", f"userset {user_id} reset_all")
+        buttons.ibutton("Leech Settings", f"userset {user_id} leech")
+        if user_dict and any(key in user_dict for key in list(fname_dict.keys())):
+            buttons.ibutton("Reset Setting", f"userset {user_id} reset_all")
         buttons.ibutton("Close", f"userset {user_id} close")
-        text = f'<b>User Settings for {name}</b>'
-        button = buttons.build_menu(2)
+
+        text = BotTheme('USER_SETTING', NAME=name, ID=user_id, USERNAME=f'@{from_user.username}', LANG=Language.get(lc).display_name() if (lc := from_user.language_code) else "N/A", DC=from_user.dc_id)
+        
+        button = buttons.build_menu(1)
     elif key == 'universal':
         buttons.ibutton("YT-DLP Options", f"userset {user_id} yt_opt")
         ytopt = 'Not Exists' if (val:=user_dict.get('yt_opt', config_dict.get('YT_DLP_OPTIONS', ''))) == '' else val
