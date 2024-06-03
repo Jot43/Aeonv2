@@ -44,9 +44,9 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
     rclone_path = f'tanha/{user_id}.conf'
     user_dict = user_data.get(user_id, {})
     if key is None:
-        buttons.ibutton("Universal", f"userset {user_id} universal")
-        buttons.ibutton("Mirror", f"userset {user_id} mirror")
-        buttons.ibutton("Leech", f"userset {user_id} leech")
+        buttons.ibutton("Universal Settings", f"userset {user_id} universal")
+        buttons.ibutton("Mirror Settings", f"userset {user_id} mirror")
+        buttons.ibutton("Leech Settings", f"userset {user_id} leech")
         if user_dict and any(key in user_dict for key in ['prefix', 'suffix', 'remname', 'ldump', 'yt_opt', 'media_group', 'rclone', 'thumb', 'as_doc', 'metadata', 'attachment']):
             buttons.ibutton("Reset", f"userset {user_id} reset_all")
         buttons.ibutton("Close", f"userset {user_id} close")
@@ -117,7 +117,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Metadata", f"userset {user_id} metadata")
         metadata = user_dict.get('metadata', 'Not Exists')
 
-        SPLIT_SIZE = '4GB' if IS_PREMIUM_USER else '2GB'
+        SPLIT_SIZE = '3.91GB' if IS_PREMIUM_USER else '2GB'
         text = f'<b>Leech Settings for {name}</b>\n\n'
         text += f'<b>• Leech split size:</b> {SPLIT_SIZE}\n'
         text += f'<b>• Leech Type:</b> {ltype}\n'
