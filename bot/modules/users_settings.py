@@ -447,7 +447,7 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         update_user_ldata(user_id, data[2][1:], '')
-        await update_user_settings(query, data[2][1:], 'universal')
+        await update_user_settings(query, data[2][1:], 'leech')
         if DATABASE_URL:
             await DbManager().update_user_data(user_id)
     elif data[2] == 'duser_tds':
