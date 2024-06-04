@@ -341,8 +341,8 @@ class MirrorLeechListener:
         user_id = self.message.from_user.id
         name, _ = await process_file(name, user_id, isMirror=not self.isLeech)
         user_dict = user_data.get(user_id, {})
-        msg = f'{escape(name)}\n\n'
-        msg += f'<blockquote><b>• Size: </b>{get_readable_file_size(size)}\n'
+        msg = f'<b>{escape(name)}\n\n</b>'
+        msg += f'<b>• Size: </b>{get_readable_file_size(size)}\n'
         msg += f'<b>• Elapsed: </b>{get_readable_time(time() - self.message.date.timestamp())}\n'
         LOGGER.info(f'Task Done: {name}')
         buttons = ButtonMaker()
@@ -414,7 +414,7 @@ class MirrorLeechListener:
                 buttons = extra_btns(buttons)
                 button = buttons.build_menu(2)
             msg += f'<b>• Uploaded by: </b>{self.tag}\n'
-            msg += f'<b>• User ID: </b><code>{self.message.from_user.id}</code></blockquote>\n\n'
+            msg += f'<b>• User ID: <code>{self.message.from_user.id}</code></b>\n\n'
 
             if config_dict['MIRROR_LOG_ID']:
                 log_msg = list((await sendMultiMessage(config_dict['MIRROR_LOG_ID'], msg, button)).values())[0]
@@ -464,7 +464,7 @@ class MirrorLeechListener:
                 self.sameDir['total'] -= 1
         msg = f'Hey, {self.tag}!\n'
         msg += 'Your download has been stopped!\n\n'
-        msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
+        msg += f'<b>Reason:</b> {escape(error)}\n'
         msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg, button)
         await delete_links(self.message)
@@ -505,7 +505,7 @@ class MirrorLeechListener:
             count = len(download_dict)
         msg = f'Hey, {self.tag}!\n'
         msg += 'Your upload has been stopped!\n\n'
-        msg += f'<blockquote><b>Reason:</b> {escape(error)}\n'
+        msg += f'<b>Reason:</b> {escape(error)}\n'
         msg += f'<b>Elapsed:</b> {get_readable_time(time() - self.message.date.timestamp())}</blockquote>'
         x = await sendMessage(self.message, msg)
         if self.linkslogmsg:
