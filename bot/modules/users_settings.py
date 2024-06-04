@@ -117,13 +117,13 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get('attachment', 'Not Exists')
 
-        buttons.ibutton("User Dump 🗑️", f"userset {user_id} ldump")
         ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if ldump != 'Not Exists' else ''} User Dump🗑️", f"userset {user_id} ldump")
         
-        buttons.ibutton("Metadata", f"userset {user_id} metadata")
-        metadata = user_dict.get('metadata', 'Not Exists')
+        metadata = 'Not Exists' if (val:=user_dict.get('metadata', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if metadata != 'Not Exists' else ''} Metadata ❤️‍🔥", f"userset {user_id} metadata")
         
-        SPLIT_SIZE = '3.91GB (Default)' if IS_PREMIUM_USER else '2GB (Default)'
+        SPLIT_SIZE = '3.91GB (Default)' if IS_PREMIUM_USER else '1.95GB (Default)'
         text = f'<b>Leech Settings for {name}</b>\n\n'
         text += f'<b>• Leech split size:</b> {SPLIT_SIZE}\n'
         text += f'<b>• Leech Type:</b> {ltype}\n'
