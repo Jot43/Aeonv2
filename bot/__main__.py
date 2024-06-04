@@ -37,7 +37,7 @@ from .helper.mirror_leech_utils.gdrive_utils import count, delete, list, clone
 if config_dict['GDRIVE_ID']:
     help_string = f'''<b>NOTE: Try each command without any arguments to see more details.</b>
 
-<blockquote expandable>/{BotCommands.MirrorCommand[0]} - Start mirroring to Google Drive.
+<b>/{BotCommands.MirrorCommand[0]} - Start mirroring to Google Drive.
 /{BotCommands.LeechCommand[0]} - Start leeching to Telegram.
 /{BotCommands.YtdlCommand[0]} - Mirror links supported by yt-dlp.
 /{BotCommands.YtdlLeechCommand[0]} - Leech links supported by yt-dlp.
@@ -49,19 +49,19 @@ if config_dict['GDRIVE_ID']:
 /{BotCommands.StopAllCommand[0]} - Cancel all active tasks.
 /{BotCommands.SearchCommand} - Search for torrents using API or plugins.
 /{BotCommands.StatusCommand[0]} - Show the status of all downloads.
-/{BotCommands.StatsCommand[0]} - Display machine stats hosting the bot.</blockquote>
+/{BotCommands.StatsCommand[0]} - Display machine stats hosting the bot.</b>
 '''
 else:
     help_string = f'''<b>NOTE: Try each command without any arguments to see more details.</b>
 
-<blockquote expandable>/{BotCommands.LeechCommand[0]} - Start leeching to Telegram.
+<b>/{BotCommands.LeechCommand[0]} - Start leeching to Telegram.
 /{BotCommands.YtdlLeechCommand[0]} - Leech links supported by yt-dlp.
 /{BotCommands.UserSetCommand} - Open the settings panel.
 /{BotCommands.MediaInfoCommand} - View MediaInfo from a file or link.
 /{BotCommands.StopAllCommand[0]} - Cancel all active tasks.
 /{BotCommands.SearchCommand} - Search for torrents using API or plugins.
 /{BotCommands.StatusCommand[0]} - Show the status of all downloads.
-/{BotCommands.StatsCommand[0]} - Display machine stats hosting the bot.</blockquote>
+/{BotCommands.StatsCommand[0]} - Display machine stats hosting the bot.</b>
 '''
 
 
@@ -244,7 +244,7 @@ async def restart_notification():
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
         try:
-            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='Restarted Successfully!')
+            await bot.edit_message_text(chat_id=chat_id, message_id=msg_id, text='<b>Restarted Successfully!$</b>')
         except:
             pass
         await aioremove(".restartmsg")
