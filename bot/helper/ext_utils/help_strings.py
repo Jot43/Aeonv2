@@ -7,7 +7,7 @@ YT_HELP_MESSAGE = """
 <code>/{cmd} options</code>
 
 <b>OPTIONS:</b>
-<blockquote expandable><b>-s:</b> Select quality for specific link or links.
+<b>-s:</b> Select quality for specific link or links.
 <b>-z password:</b> Create a password-protected zip file.
 <b>-n new_name:</b> Rename the file.
 <b>-t thumbnail url:</b> Custom thumbnail for each leech(raw or tg image url).
@@ -27,7 +27,7 @@ MIRROR_HELP_MESSAGE = """
 <code>/{cmd} options</code>
 
 <b>OPTIONS:</b>
-<blockquote expandable><b>-n new name:</b> Rename the file or folder.
+<b>-n new name:</b> Rename the file or folder.
 <b>-atc attachment url:</b> Custom attachment for each mkv.(raw only)
 <b>-t thumbnail url:</b> Custom thumbnail for each leech.(raw or tg image url)
 <b>-ss value:</b> Generate ss for leech video, max 10 for each leach.
