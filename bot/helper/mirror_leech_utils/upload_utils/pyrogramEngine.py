@@ -303,7 +303,7 @@ class TgUploader:
                     self.__last_msg_in_group = False
                     self.__last_uploaded = 0
                     await self.__switching_client()
-                    await self.__upload_file(cap_mono, file_)
+                    await self.__upload_file(cap_bold, file_)
                     if not isDeleted:
                         values_list = list(self.__leechmsg.values())
                         if values_list:
@@ -346,7 +346,7 @@ class TgUploader:
 
     @retry(wait=wait_exponential(multiplier=2, min=4, max=8), stop=stop_after_attempt(3),
            retry=retry_if_exception_type(Exception))
-    async def __upload_file(self, cap_mono, file, force_document=False):
+    async def __upload_file(self, cap_bold, file, force_document=False):
         if self.__thumb is not None and not await aiopath.exists(self.__thumb):
             self.__thumb = None
         thumb = self.__thumb
@@ -375,7 +375,7 @@ class TgUploader:
                                                                        reply_to_message_id=self.__sent_msg.id,
                                                                        document=self.__up_path,
                                                                        thumb=thumb,
-                                                                       caption=cap_mono,
+                                                                       caption=cap_bold,
                                                                        force_document=True,
                                                                        disable_notification=True,
                                                                        progress=self.__upload_progress,
@@ -418,7 +418,7 @@ class TgUploader:
                 nrml_media = await self.__client.send_video(chat_id=self.__sent_msg.chat.id,
                                                                     reply_to_message_id=self.__sent_msg.id,
                                                                     video=self.__up_path,
-                                                                    caption=cap_mono,
+                                                                    caption=cap_bold,
                                                                     duration=duration,
                                                                     width=width,
                                                                     height=height,
@@ -443,7 +443,7 @@ class TgUploader:
                 self.__sent_msg = await self.__client.send_audio(chat_id=self.__sent_msg.chat.id,
                                                                     reply_to_message_id=self.__sent_msg.id,
                                                                     audio=self.__up_path,
-                                                                    caption=cap_mono,
+                                                                    caption=cap_bold,
                                                                     duration=duration,
                                                                     performer=artist,
                                                                     title=title,
@@ -458,7 +458,7 @@ class TgUploader:
                 self.__sent_msg = await self.__client.send_photo(chat_id=self.__sent_msg.chat.id,
                                                                     reply_to_message_id=self.__sent_msg.id,
                                                                     photo=self.__up_path,
-                                                                    caption=cap_mono,
+                                                                    caption=cap_bold,
                                                                     disable_notification=True,
                                                                     progress=self.__upload_progress,
                                                                     reply_markup=await self.__buttons(self.__up_path))
