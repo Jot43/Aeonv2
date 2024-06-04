@@ -386,7 +386,7 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         update_user_ldata(user_id, 'media_group', not user_dict.get('media_group', False))
-        await update_user_settings(query, 'leech')
+        await update_user_settings(query, 'universal')
         if DATABASE_URL:
             await DbManager().update_user_data(user_id)
     elif data[2] == 'rcc':
@@ -422,7 +422,7 @@ async def edit_user_settings(client, query):
         handler_dict[user_id] = False
         await query.answer()
         edit_mode = len(data) == 4
-        await update_user_settings(query, data[2], 'universal', edit_mode)
+        await update_user_settings(query, data[2], 'leech', edit_mode)
         if not edit_mode: return
         pfunc = partial(set_custom, pre_event=query, key=data[2])
         rfunc = partial(update_user_settings, query, data[2], 'universal')
