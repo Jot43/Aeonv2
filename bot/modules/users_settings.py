@@ -102,20 +102,20 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
 
 
-        buttons.ibutton("Leech Caption", f"userset {user_id} lcaption")
-        lcaption = user_dict.get('lcaption', 'Not Exists')
+        lcaption = 'Not Exists' if (val:=user_dict.get('lcaption', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if lcaption != 'Not Exists' else ''} Leech Caption", f"userset {user_id} lcaption")
 
-        buttons.ibutton("Prefix", f"userset {user_id} prefix")
-        prefix = user_dict.get('prefix', 'Not Exists')
+        prefix = 'Not Exists' if (val:=user_dict.get('prefix', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if prefix != 'Not Exists' else ''} Leech Prefix", f"userset {user_id} prefix")
 
         suffix = 'Not Exists' if (val:=user_dict.get('suffix', '')) == '' else val
         buttons.ibutton(f"{'✅️' if suffix != 'Not Exists' else ''} Leech Suffix", f"userset {user_id} suffix")
 
-        buttons.ibutton("Remname", f"userset {user_id} remname")
-        remname = user_dict.get('remname', 'Not Exists')
+        remname = 'Not Exists' if (val:=user_dict.get('remname', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if remname != 'Not Exists' else ''} Remname", f"userset {user_id} suffix")
         
-        buttons.ibutton("Attachment", f"userset {user_id} attachment")
-        attachment = user_dict.get('attachment', 'Not Exists')
+        attachment = 'Not Exists' if (val:=user_dict.get('attachment', '')) == '' else val
+        buttons.ibutton(f"{'✅️' if attachment != 'Not Exists' else ''} Attachment", f"userset {user_id} attachment")
 
         ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
         buttons.ibutton(f"{'✅️' if ldump != 'Not Exists' else ''} User Dump🗑️", f"userset {user_id} ldump")
