@@ -110,8 +110,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Prefix", f"userset {user_id} prefix")
         prefix = user_dict.get('prefix', 'Not Exists')
 
-        suffix = 'Not Exists' if (val:=user_dict.get('suffix', config_dict.get('LEECH_FILENAME_SUFFIX', ''))) == '' else val
-        buttons.ibutton(f"{'✅️' if suffix != 'Not Exists' else ''} Leech Suffix", f"userset {user_id} suffix")
+        buttons.ibutton("Suffix", f"userset {user_id} suffix")
+        suffix = user_dict.get('suffix', 'Not Exists')
 
         buttons.ibutton("Remname", f"userset {user_id} remname")
         remname = user_dict.get('remname', 'Not Exists')
@@ -119,10 +119,10 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get('attachment', 'Not Exists')
         
-        metadata = 'Not Exists' if (val:=user_dict.get('metadata', '')) == '' else val
-        buttons.ibutton(f"{'✅️' if metadata != 'Not Exists' else ''} Metadata", f"userset {user_id} metadata")
+        buttons.ibutton("Metadata 🔥", f"userset {user_id} metadata")
+        metadata = user_dict.get('metadata', 'Not Exists')
         
-        SPLIT_SIZE = '3.91GB' if IS_PREMIUM_USER else '2GB'
+        SPLIT_SIZE = '3.91GB (Default)' if IS_PREMIUM_USER else '2GB (Default)'
         text = f'<b>Leech Settings for {name}</b>\n\n'
         text += f'<b>• Leech split size:</b> {SPLIT_SIZE}\n'
         text += f'<b>• Leech Type:</b> {ltype}\n'
