@@ -98,9 +98,8 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
             ltype = "MEDIA"
             buttons.ibutton("Send As Document", f"userset {user_id} doc")
 
-        buttons.ibutton("Thumbnail", f"userset {user_id} thumb")
         thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
-
+        buttons.ibutton(f"{'✅️' if thumbmsg == 'Exists' else ''} Thumbnail", f"userset {user_id} thumb")
 
         lcaption = 'Not Exists' if (val:=user_dict.get('lcaption', '')) == '' else val
         buttons.ibutton(f"{'✅️' if lcaption != 'Not Exists' else ''} Leech Caption", f"userset {user_id} lcaption")
@@ -112,7 +111,7 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton(f"{'✅️' if suffix != 'Not Exists' else ''} Leech Suffix", f"userset {user_id} suffix")
 
         remname = 'Not Exists' if (val:=user_dict.get('remname', '')) == '' else val
-        buttons.ibutton(f"{'✅️' if remname != 'Not Exists' else ''} Remname", f"userset {user_id} suffix")
+        buttons.ibutton(f"{'✅️' if remname != 'Not Exists' else ''} Remname", f"userset {user_id} remname")
         
         attachment = 'Not Exists' if (val:=user_dict.get('attachment', '')) == '' else val
         buttons.ibutton(f"{'✅️' if attachment != 'Not Exists' else ''} Attachment", f"userset {user_id} attachment")
