@@ -208,13 +208,13 @@ def get_readable_message():
         globals()['STATUS_START'] = STATUS_LIMIT * (PAGES - 1)
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
-        msg += f"<b>{download.status()}:</b> {escape(f'{download.name()}')}\n"
+        msg += f"<b>{download.status()}:</b> <b>{escape(f'{download.name()}')}\n"</b>
         msg += f"by {source(download)}\n"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_PROCESSING]:
-            msg += f"<b><code>{progress_bar(download.progress())}</code> {download.progress()}"
-            msg += f"\n{download.processed_bytes()} of {download.size()}"
-            msg += f"\nSpeed: {download.speed()}"
-            msg += f'\nEstimated: {download.eta()}'
+            msg += f"<b><code>{progress_bar(download.progress())}</code> {download.progress()}"</b>
+            msg += f"<b>\n{download.processed_bytes()} of {download.size()}" </b>
+            msg += f"<b>\nSpeed: {download.speed()}"</b>
+            msg += f'<b>\nEstimated: {download.eta()}'</b>
             if hasattr(download, 'seeders_num'):
                 try:
                     msg += f"\nSeeders: {download.seeders_num()} | Leechers: {download.leechers_num()}"
