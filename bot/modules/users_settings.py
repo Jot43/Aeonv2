@@ -58,17 +58,20 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("YT-DLP Options", f"userset {user_id} yt_opt")
         ytopt = 'Not Exists' if (val:=user_dict.get('yt_opt', config_dict.get('YT_DLP_OPTIONS', ''))) == '' else val
 
-        buttons.ibutton("Leech Dump", f"userset {user_id} ldump")
-        ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
-
         mediainfo = "Enabled" if user_dict.get('mediainfo', config_dict['SHOW_MEDIAINFO']) else "Disabled"
         buttons.ibutton('Disable MediaInfo' if mediainfo == 'Enabled' else 'Enable MediaInfo', f"userset {user_id} mediainfo")
         if config_dict['SHOW_MEDIAINFO']:
             mediainfo = "Force Enabled"
 
+        if user_dict.get('media_group', False) or ('media_group' not in user_dict and config_dict['MEDIA_GROUP']):
+            buttons.ibutton("Disable Media Group", f"userset {user_id} mgroup")
+        else:
+            buttons.ibutton("Enable Media Group", f"userset {user_id} mgroup")
+        media_group = 'Enabled' if user_dict.get('media_group', config_dict.get('MEDIA_GROUP')) else 'Disabled'
+        
         text = f'<b>Universal Settings for {name}</b>\n\n'
         text += f'<b>• YT-DLP Options:</b> <b><code>{ytopt}</code></b>\n'
-        text += f'<b>• Leech Dump:</b> <code>{ldump}</code>\n'
+        text += f'<b>• Media Group:</b> {media_group}\n'
         text += f'<b>• MediaInfo Mode:</b> <code>{mediainfo}</code>'
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
@@ -98,11 +101,6 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         buttons.ibutton("Thumbnail", f"userset {user_id} thumb")
         thumbmsg = "Exists" if await aiopath.exists(thumbpath) else "Not Exists"
 
-        if user_dict.get('media_group', False) or ('media_group' not in user_dict and config_dict['MEDIA_GROUP']):
-            buttons.ibutton("Disable Media Group", f"userset {user_id} mgroup")
-        else:
-            buttons.ibutton("Enable Media Group", f"userset {user_id} mgroup")
-        media_group = 'Enabled' if user_dict.get('media_group', config_dict.get('MEDIA_GROUP')) else 'Disabled'
 
         buttons.ibutton("Leech Caption", f"userset {user_id} lcaption")
         lcaption = user_dict.get('lcaption', 'Not Exists')
@@ -118,8 +116,11 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         
         buttons.ibutton("Attachment", f"userset {user_id} attachment")
         attachment = user_dict.get('attachment', 'Not Exists')
+
+        buttons.ibutton("User Dump 🗑️", f"userset {user_id} ldump")
+        ldump = 'Not Exists' if (val:=user_dict.get('ldump', '')) == '' else val
         
-        buttons.ibutton("Metadata 🔥", f"userset {user_id} metadata")
+        buttons.ibutton("Metadata", f"userset {user_id} metadata")
         metadata = user_dict.get('metadata', 'Not Exists')
         
         SPLIT_SIZE = '3.91GB (Default)' if IS_PREMIUM_USER else '2GB (Default)'
@@ -127,13 +128,13 @@ async def get_user_settings(from_user, key=None, edit_type=None, edit_mode=None)
         text += f'<b>• Leech split size:</b> {SPLIT_SIZE}\n'
         text += f'<b>• Leech Type:</b> {ltype}\n'
         text += f'<b>• Custom Thumbnail:</b> {thumbmsg}\n'
-        text += f'<b>• Media Group:</b> {media_group}\n'
         text += f'<b>• Leech Caption:</b> <code>{escape(lcaption)}</code>\n'
-        text += f'<b>• Metadata:</b> <code>{metadata}</code>\n'
+        text += f'<b>• User Dump:</b> <code>{ldump}</code>\n'
         text += f'<b>• Prefix:</b> <code>{prefix}</code>\n'
         text += f'<b>• Suffix:</b> <code>{suffix}</code>\n'
         text += f'<b>• Attachment:</b> <code>{attachment}</code>\n'
         text += f'<b>• Remname:</b> <code>{remname}</code>'
+        text += f'<b>• Metadata:</b> <code>{metadata}</code>\n'
 
         buttons.ibutton("Back", f"userset {user_id} back", "footer")
         buttons.ibutton("Close", f"userset {user_id} close", "footer")
@@ -379,7 +380,7 @@ async def edit_user_settings(client, query):
             return await query.answer("Force Enabled! Can't Alter Settings", show_alert=True)
         await query.answer()
         update_user_ldata(user_id, data[2], not user_dict.get(data[2], False))
-        await update_user_settings(query, 'leech')
+        await update_user_settings(query, 'universal')
         if DATABASE_URL:
             await DbManager().update_user_data(user_id)
     elif data[2] == 'mgroup':
