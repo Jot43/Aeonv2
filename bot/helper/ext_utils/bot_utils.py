@@ -199,7 +199,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = """💫 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒: <a> href='https://telegram.me/NordBotz'>Nord Botz </a> \n 🧑‍💻 Deploy By: Jot Sidhu</b>\n\n"""
+    msg = """💫 𝖯𝗈𝗐𝖾𝗋𝖾𝖽 𝖡𝗒: @NordBotz \n 🧑‍💻 Deploy By: Jot Sidhu</b>\n\n"""
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
