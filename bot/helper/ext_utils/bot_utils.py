@@ -199,7 +199,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = """<b>💫Powered By: @NordBotz \n 🧑‍💻 Deploy By: Jot Sidhu</b>\n\n"""
+    msg = """<b>💫Powered By: <a> href='https://t.me/NordBotz'>Nord Botz</a> \n 🧑‍💻 Deploy By: Jot Sidhu</b>\n\n"""
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -213,7 +213,7 @@ def get_readable_message():
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
         msg += f"<b>{download.status()}</b>: {escape(f'{download.name()}')}"
-        msg += f"<b> \n ┠ 🥷 User ID: <code>{source(download)(f'{user.id}')}</code></b>"
+        msg += f"<b> \n ┠ 🥷 User: {source(download)}</b>"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_PROCESSING]:
             msg += f" ┠ <code>{progress_bar(download.progress())}</code> {download.progress()}"
             msg += f"\n ┠ 📊 {download.processed_bytes()} of {download.size()}"
