@@ -199,7 +199,7 @@ def source(self):
 
 
 def get_readable_message():
-    msg = """<b>💫Powered By: @NordBotz \n Deploy By: Jot Sidhu</b>\n\n"""
+    msg = """<b>💫Powered By: @NordBotz \n 🧑‍💻 Deploy By: Jot Sidhu</b>\n\n"""
     button = None
     tasks = len(download_dict)
     currentTime = get_readable_time(time() - botStartTime)
@@ -213,12 +213,12 @@ def get_readable_message():
         globals()['PAGE_NO'] = PAGES
     for download in list(download_dict.values())[STATUS_START:STATUS_LIMIT+STATUS_START]:
         msg += f"<b>{download.status()}</b>: {escape(f'{download.name()}')}"
-        msg += f"<b> \n ┠ User: </b>@{source(download)}\n"
+        msg += f"<b> \n ┠ 🥷 User: </b>@{source(download)}\n"
         if download.status() not in [MirrorStatus.STATUS_SPLITTING, MirrorStatus.STATUS_SEEDING, MirrorStatus.STATUS_PROCESSING]:
             msg += f" ┠ <code>{progress_bar(download.progress())}</code> {download.progress()}"
-            msg += f"\n ┠ {download.processed_bytes()} of {download.size()}"
-            msg += f"<b>\n ┠ Speed:</b> {download.speed()}"
-            msg += f'<b>\n ┠ Estimated:</b> {download.eta()}'
+            msg += f"\n ┠ 📊 {download.processed_bytes()} of {download.size()}"
+            msg += f"<b>\n ┠ 🥶 Speed:</b> {download.speed()}"
+            msg += f'<b>\n ┠ ⏳ Estimated:</b> {download.eta()}'
             if hasattr(download, 'seeders_num'):
                 try:
                     msg += f"\nSeeders: {download.seeders_num()} | Leechers: {download.leechers_num()}"
@@ -252,6 +252,7 @@ def get_readable_message():
         buttons.ibutton(f"{PAGE_NO}/{PAGES}", "status ref")
         buttons.ibutton("Next", "status nex")
         button = buttons.build_menu(3)
+    msg += f"<b>😆      Thanks To Using Bot /n 😊    Please Share Group Link Bio  
     msg += f"<b>• Tasks</b>: {tasks}{bmax_task}"
     msg += f"\n<b>• Bot uptime</b>: {currentTime}"
     msg += f"\n<b>• Free disk space</b>: {get_readable_file_size(disk_usage('/usr/src/app/downloads/').free)}"
